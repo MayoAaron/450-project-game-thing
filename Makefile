@@ -1,9 +1,14 @@
 CPP := g++
-SRC := src/*.cpp
+SRC :=  src/main.cpp src/engine.cpp
 HDR := -Iinclude
 LD := -lSDL2 -lSDL2_image
 
-run:
+unix:
 	$(CPP) $(HDR) $(SRC) $(LD)
 	./a.out
 	rm -rf include/*.gch
+	exit
+
+windows:
+	$(CPP) $(HDR) $(SRC) $(LD) -lmingw32 -Llib_windows
+	./a.exe
