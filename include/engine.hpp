@@ -1,7 +1,8 @@
 #ifndef ENGINE_HPP
 #define ENGINE_HPP
+#define SDL_MAIN_HANDLED
 
-#include "SDL2/SDL.h"
+#include <SDL2/SDL.h>
 
 #include <functional>
 #include <string>
