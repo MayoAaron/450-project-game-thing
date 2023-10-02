@@ -10,5 +10,5 @@ unix:
 	exit
 
 windows:
-	$(CPP) $(HDR) $(SRC) $(LD) -lmingw32 -Llib_windows
+	$(CPP) $(HDR) $(SRC) $(LD) -lmingw32 -Llib_windows -static-libgcc -static-libstdc++
 	./a.exe
