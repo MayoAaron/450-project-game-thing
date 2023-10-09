@@ -2,7 +2,8 @@
 #define ENGINE_HPP
 #define SDL_MAIN_HANDLED
 
-#include <SDL2/SDL.h>
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 
 #include <functional>
 #include <string>
@@ -16,7 +17,7 @@ typedef int SpriteDescriptor;
 
 class Engine {
 public:
-    Engine(const char* window_title, int window_height, int window_width, std::function<void(Engine*)> game_logic);
+    Engine(const char* window_title, int window_height, int window_width);
     ~Engine();
 
     TileArtDescriptor LoadTileArt(std::string filename);
@@ -31,7 +32,8 @@ public:
     int AddLayer(int tile_height, int tile_width);
     void ScrollLayer(int layer_number, int dx, int dy);
 
-
+    SDL_Renderer* renderer;
+    SDL_Window* window;
     void Run();
 private:
 
@@ -41,12 +43,12 @@ private:
     std::vector<std::vector<TileArtDescriptor>> layers;
 
 
-    SDL_Renderer* renderer;
-    SDL_Window* window;
+    // SDL_Renderer* renderer;
+    // SDL_Window* window;
 
     std::function<void(Engine*)> game_logic;
     
     void DrawTile(TileArtDescriptor ta, int x, int y);
 };
 
-#endif 
+#endif
