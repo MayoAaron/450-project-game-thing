@@ -1,36 +1,45 @@
 #include "engine.hpp"
-
 #include <SDL2/SDL_image.h>
 #include <iostream>
 
 #define NO_FLAGS 0
 
-Engine::Engine(const char* window_title, int window_height, int window_width, std::function<void(Engine*)> game_logic) {
+Engine::Engine(const char* window_title, int window_height, int window_width) {
     int rendererFlags, windowFlags;
     rendererFlags = SDL_RENDERER_ACCELERATED;
     windowFlags = NO_FLAGS;
 
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        std::cout << "Failed to init SDL " << SDL_GetError() << std::endl;
+    if (SDL_Init(SDL_INIT_EVERYTHING)!= -1) 
+    {
+        this->window = SDL_CreateWindow(window_title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, SDL_WINDOW_FULLSCREEN);
+        if (this->window) 
+        {
+            //SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+            this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
+            if (this->renderer) 
+            {
+                std::cout << "Everything checks out" << std::endl;
+            }
+            else
+            {
+                SDL_DestroyWindow(this->window);
+                SDL_Quit();
+                std::cout<< "Failed to initialize SDL renderer: "<< SDL_GetError()<<std::endl;
+                return;
+            }
+        }
+        else
+        {
+            SDL_Quit();
+            std::cout<< "Failed to initialize SDL window: "<< SDL_GetError()<<std::endl;
+            return;
+        }
+    }
+    else
+    {
+        std::cout<< "Failed to initialize SDL: "<< SDL_GetError()<<std::endl;
         return;
     }
-
-    this->window = SDL_CreateWindow(window_title, 0, 0, window_width, window_height, windowFlags);
-
-    if (!this->window) {
-        std::cout << "Failed to initialize window" << std::endl;
-        return;
-    }
-
-    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
-    this->renderer = SDL_CreateRenderer(this->window, -1, rendererFlags);
-
-    if (!this->renderer) {
-        std::cout << "Failed to initialize renderer" << std::endl;
-        return;
-    }
-
-
     this->game_logic = game_logic;
 
 
@@ -72,16 +81,19 @@ void Engine::Run() {
     }
 }
 
-TileArtDescriptor Engine::LoadTileArt(std::string filename) {
-    SDL_Texture* this_texture = IMG_LoadTexture(this->renderer, filename.c_str());
+TileArtDescriptor Engine::LoadTileArt(std::string filename) 
+{
+    //SDL_Surface* this_image = IMG_Load(filename.c_str());
+    // SDL_SetSurfaceBlendMode(this_image, SDL_BLENDMODE_BLEND);
+    // SDL_Texture* this_texture = SDL_CreateTextureFromSurface(this->renderer, this_image);
+    // if (this_image == NULL) 
+    // {
+    //     std::cout << "Failed to load tile at " << filename << std::endl;
+    //     return -1;
+    // }
 
-    if (this_texture == NULL) {
-        std::cout << "Failed to load tile at " << filename << std::endl;
-        return -1;
-    }
-
-    this->tile_arts.push_back(this_texture);
-    return this->tile_arts.size() - 1;
+    // this->tile_arts.push_back(this_image);
+    // return this->tile_arts.size() - 1;
 }
 
 void Engine::DrawTile(TileArtDescriptor ta, int x, int y) {
