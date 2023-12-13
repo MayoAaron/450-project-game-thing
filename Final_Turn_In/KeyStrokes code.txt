@@ -1,0 +1,28 @@
+// case SDL_KEYDOWN:
+        //     switch (event.key.keysym.sym)
+        //     {
+        //     case SDLK_a:
+        //         srcRect.x += -ScrollSpeed; // Increase the x position to move the image right
+        //         // If the images leave the screan bounds they will go to the other side of the screen and start scrolling again
+        //         if (srcRect.x <= 0)
+        //             srcRect.x = image2->accessSurface()->w - 320;
+        //         break;
+        //     case SDLK_d:
+        //         srcRect.x += ScrollSpeed; // Increase the x position to move the image right
+        //         // If the images leave the screan bounds they will go to the other side of the screen and start scrolling again
+        //         if (srcRect.x >= image2->accessSurface()->w - 320)
+        //             srcRect.x = 0;
+        //         break;
+        //     case SDLK_LEFT:                // Left arrow key
+        //         srcRect.x += -ScrollSpeed; // Increase the x position to move the image right
+        //         // If the images leave the screan bounds they will go to the other side of the screen and start scrolling again
+        //         if (srcRect.x <= 0)
+        //             srcRect.x = image2->accessSurface()->w - 320;
+        //         break;
+        //     case SDLK_RIGHT:              // Right arrow key
+        //         srcRect.x += ScrollSpeed; // Increase the x position to move the image right
+        //         // If the images leave the screan bounds they will go to the other side of the screen and start scrolling again
+        //         if (srcRect.x >= image2->accessSurface()->w - 320)
+        //             srcRect.x = 0;
+        //         break;
+        //     }
