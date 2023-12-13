@@ -1,0 +1,16 @@
+Features to add : 
+- make it so that jump doesnt stop the run command 
+- work on jump function
+- work on animations (if theres time)
+- add switch layer function 
+- implement an additional backround layer (grass/path layer that is the bottom half of the screen)
+- find new backrounds for scrolling 
+- be able to remove tiles
+- make function to get screen width and height
+=============================================================
+
+Things to fix 
+- refactor/clean up code and functions
+- add documentation 
+- fix the dimension 1440 vs 1080 etc.
+
